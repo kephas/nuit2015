@@ -34,3 +34,7 @@
        (progn ,@body)
      (not-shell () (serve-json "{}" :status 404))
      (error () (serve-json "{}" :status 501))))
+
+(defroute "/alertes" ()
+  (with-json-error
+    (serve-json* (mapcar #'second (shell-list *root-shell* "alertes")))))
