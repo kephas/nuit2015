@@ -8,6 +8,8 @@ web:
   stdin_open: true
 pg:
   image: postgres
+  ports:
+    - "5432:5432"
   environment:
     - POSTGRES_USER=nuit
     - POSTGRES_PASSWORD=nuit

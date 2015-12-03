@@ -9,23 +9,20 @@
   :author "WeGROKLC <wegroklc@gmail.com>"
   :licence "AGPL"
   :depends-on ("scheme" "alexandria" "cl-fad" "cl-ppcre" "split-sequence" "metabang-bind"
-			"do-urlencode" "cl-who" "drakma" "cl-emb"
-			"hu.dwim.stefil" "caveman2" "elephant" "cl-json")
+			"do-urlencode" "cl-who" "drakma" "cl-emb" "uuid"
+			"hu.dwim.stefil" "caveman2" "elephant" "cl-json"
+			"lack-middleware-static")
   :components ((:module	"src"
 	        :components ((:file "package")
 			     (:file "config")
 			     (:file "misc")
-			     (:file "tag")
-			     (:file "date")
 			     (:module "model"
 			      :components ((:file "model")
-					   (:file "shell")
-					   (:file "search")))
+					   (:file "shell")))
 			     (:module "web"
 			      :components ((:file "bootstrap")
 					   (:file "web")
-					   (:file "json")
-					   (:file "shell")))
+					   (:file "json")))
 			     (:file "test")
 			     (:file "repl"))))
   :serial t)

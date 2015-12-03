@@ -44,11 +44,11 @@
 (defun clackup (port &optional config-file)
   (read-configuration! config-file)
   (open-storage)
-  (shell-ensure-hierarchy! *root-shell* '(("public" ("combineds"))("users")))
+  (shell-ensure-hierarchy! *root-shell* '(("alertes")))
   (setf drakma:*drakma-default-external-format* :UTF-8)
   (clack:clackup
-   (clack.builder:builder
-    (clack.middleware.static:<clack-middleware-static>
+   (lack.builder:builder
+    (lack.middleware.static:*lack-middleware-static*
      :path "/static/"
-     :root (merge-pathnames #p"static/" (asdf:system-source-directory "nabu")))
+     :root (merge-pathnames #p"static/" (asdf:system-source-directory "nuit2015")))
     *app*) :port port :debug (config* :debug) :server (config* :server)))

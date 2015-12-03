@@ -10,5 +10,5 @@
 :debug t
 
 ; location of the elephant storage
-:ele-store (:clsql (:postgresql "host" "database" "user" "password" "port"))
+:ele-store (:clsql (:postgresql "localhost" "nuit" "nuit" "nuit" "5432"))
 )

@@ -19,8 +19,6 @@
   (:import-from :cl-fad #:pathname-as-file #:list-directory)
   (:import-from :do-urlencode #:urlencode #:urldecode)
   (:import-from :caveman2 #:defroute #:*request* #:*response*)
-  (:import-from #:clack.request #:query-parameter #:body-parameter)
-  (:import-from #:clack.response #:redirect)
   (:import-from :json #:*json-output* #:encode-json
 		#:encode-json-to-string #:encode-json-plist-to-string
 		#:with-array #:as-array-member
