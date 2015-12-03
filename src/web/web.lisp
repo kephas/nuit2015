@@ -33,6 +33,8 @@
 			 `(format nil "~a=\"~a\"" ,var ,value)
 			 `(format nil "~a=~a" ,var ,value)))))
 
+(defvar *root-shell*)
+
 (defun open-storage ()
   (ele:open-store (config* :ele-store))
   (let ((shell (ele:get-from-root "root-shell")))
@@ -48,7 +50,7 @@
   (setf drakma:*drakma-default-external-format* :UTF-8)
   (clack:clackup
    (lack.builder:builder
-    (lack.middleware.static:*lack-middleware-static*
+    (:static
      :path "/static/"
      :root (merge-pathnames #p"static/" (asdf:system-source-directory "nuit2015")))
     *app*) :port port :debug (config* :debug) :server (config* :server)))

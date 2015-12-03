@@ -21,7 +21,7 @@
 (defun read-configuration! (&optional config-file)
   (let* ((file (if config-file config-file
 		   (merge-pathnames #p"config.local"
-				    (asdf:component-pathname (asdf:find-system "nabu")))))
+				    (asdf:component-pathname (asdf:find-system "nuit2015")))))
 	 (config (handler-case (with-input-from-file (in file)
 				 (read in))
 		   (error () nil))))

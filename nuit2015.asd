@@ -10,8 +10,7 @@
   :licence "AGPL"
   :depends-on ("scheme" "alexandria" "cl-fad" "cl-ppcre" "split-sequence" "metabang-bind"
 			"do-urlencode" "cl-who" "drakma" "cl-emb" "uuid"
-			"hu.dwim.stefil" "caveman2" "elephant" "cl-json"
-			"lack-middleware-static")
+			"hu.dwim.stefil" "clack" "caveman2" "elephant" "cl-json")
   :components ((:module	"src"
 	        :components ((:file "package")
 			     (:file "config")
