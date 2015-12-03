@@ -24,7 +24,7 @@ RUN sbcl --eval '(ql:register-local-projects)' \
 # Pre-load remaining dependencies before COPY
 RUN sbcl --eval '(ql:quickload (list "uuid" "do-urlencode"))'
 
-COPY ./ /root/quicklisp/local-projects/nabu/
+COPY ./ /root/quicklisp/local-projects/nuit2015/
 RUN sbcl --eval '(ql:register-local-projects)' --eval '(ql:quickload "nuit2015")' # Pre-compile the project
 
 CMD sbcl --eval '(ql:quickload (list "cl-docker-tools" "nabu"))' --eval "(in-package :nabu)" \
