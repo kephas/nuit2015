@@ -2,12 +2,12 @@ web:
   build: .
   ports:
     - "127.0.0.1:4005:4005"
-    - "8888:80"
+    - "9999:80"
   links:
     - pg
   stdin_open: true
 pg:
   image: postgres
   environment:
-    - POSTGRES_USER=nabu
-    - POSTGRES_PASSWORD=nabu
+    - POSTGRES_USER=nuit
+    - POSTGRES_PASSWORD=nuit
