@@ -25,9 +25,10 @@ RUN sbcl --eval '(ql:register-local-projects)' \
 RUN sbcl --eval '(ql:quickload (list "uuid" "do-urlencode"))'
 
 COPY ./ /root/quicklisp/local-projects/nuit2015/
-RUN sbcl --eval '(ql:register-local-projects)' --eval '(ql:quickload "nuit2015")' # Pre-compile the project
+RUN sbcl --eval '(ql:register-local-projects)' --eval '(ql:quickload "st-json")' --eval '(ql:quickload "nuit2015")' # Pre-compile the project
 
-CMD sbcl --eval '(ql:quickload (list "cl-docker-tools" "nabu"))' --eval "(in-package :nabu)" \
+CMD sbcl --eval '(ql:quickload "st-json")' \
+    	 --eval '(ql:quickload (list "cl-docker-tools" "nabu"))' --eval "(in-package :nabu)" \
          --eval '(docker-tools:swank 4005)' --eval "(clackup 80)"
 EXPOSE 4005
 EXPOSE 80
