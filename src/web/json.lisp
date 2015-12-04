@@ -37,4 +37,6 @@
 
 (defroute "/alertes" ()
   (with-json-error
-    (serve-json* (mapcar #'second (shell-list *root-shell* "alertes")))))
+    (if-let (alertes (mapcar #'second (shell-list *root-shell* "alertes")))
+      (serve-json* alertes)
+      (serve-json "[]"))))
