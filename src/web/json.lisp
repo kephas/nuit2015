@@ -23,7 +23,7 @@
 
 (defun serve-json (json &key (status 200))
   `(,status
-    (:content-type "application/json; charset=utf-8")
+    (:content-type "application/json; charset=utf-8" :access-control-allow-origin "*")
     (,json)))
 
 (defun serve-json* (object)
@@ -34,3 +34,28 @@
        (progn ,@body)
      (not-shell () (serve-json "{}" :status 404))
      (error () (serve-json "{}" :status 501))))
+
+(defroute "/alertes" ()
+  (with-json-error
+    (if-let (alertes (mapcar #'second (shell-list *root-shell* "alertes")))
+      (serve-json* alertes)
+      (serve-json "[]"))))
+
+(defun body-param (name)
+  (cdr (assoc name (lack.request:request-body-parameters *request*) :test #'string=)))
+
+(defvar *times* '(("med" 30 :minute)("evac" 4 :hour)("assist" 1 :day)("zombie" 10 :minute)))
+
+(defroute ("/alertes" :method :POST) ()
+  (with-json-error
+    (setf (shell-object *root-shell* "alertes" (make-oid))
+	  (make-instance 'alerte
+			 :titre (body-param "titre")
+			 :type (body-param "type")
+			 :emis (local-time:format-rfc3339-timestring nil (local-time:now))
+			 :inter (local-time:format-rfc3339-timestring
+				 nil (apply #'local-time:timestamp+ (local-time:now)
+					    (cdr (assoc (body-param "type") *times* :test #'string=))))
+			 :lieu (body-param "lieu")
+			 :pers (body-param "personnes")))
+    (serve-json (encode-json-plist-to-string (list :sucess t)))))

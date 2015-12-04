@@ -21,11 +21,6 @@
 
 (defgeneric tui-print (object))
 
-(defmethod tui-print ((object unit))
-  (format *query-io* "~a[~a] || " (unit-name object) (length (unit-glyphs object)))
-  (maphash (lambda (key value) (format *query-io* "~a=~a | " key value)) (nabu-metadata object))
-  (terpri *query-io*))
-
 (defun tui-list (objects)
   (dolist (object objects)
     (tui-print object)))
