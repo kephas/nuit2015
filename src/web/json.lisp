@@ -23,7 +23,7 @@
 
 (defun serve-json (json &key (status 200))
   `(,status
-    (:content-type "application/json; charset=utf-8")
+    (:content-type "application/json; charset=utf-8" :access-control-allow-origin "*")
     (,json)))
 
 (defun serve-json* (object)
