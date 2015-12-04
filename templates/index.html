@@ -2,12 +2,14 @@
 <html lang="fr" ng-app="helpus">
     <head>
         <meta charset="utf-8" />
-        <script type="text/javascript" src="app/lib/angular.js"></script>
+        <!--<script type="text/javascript" src="app/lib/angular.js"></script>-->
+        <script data-require="angular.js@1.2.x" src="http://code.angularjs.org/1.2.13/angular.js" data-semver="1.2.13"></script>
         <script type="text/javascript" src="app/js/app.js"></script>
         <script type="text/javascript" src="app/js/controller.js"></script>
         <script type="text/javascript" src="app/js/service.js"></script>
         <!--<script type="text/html" src="app/formulaire_personne.html"></script>-->
         <script src="app/resources/crises_tests.json"></script>
+        <link rel="stylesheet" href="style.css" />
     </head>
     
     <body>
@@ -53,29 +55,33 @@
                             <select name = "type" ng-model="vm.newAlert.type">
                                 <option ng-repeat = "type in vm.AllTypes" >{{type}}</option>
                             </select><br/>
+                        <input type="button" ng-click="vm.newAlert = {}" value="Reset alerte" />
+                        <input type="submit" ng-click="vm.saveNewAlert(vm.newAlert); vm.save = true" />
+                        <br/>
+                        <br/>
+
                         Qui est concerné ?
-                            <button ng-click="vm.personAdd = true">
+                            <button ng-click="vm.personAdd = true" ng-if = "vm.personAdd == false">
                                 Ajouter une personne
                             </button>
 
-                            <div ng-if="vm.personAdd" ngInclude ="formulaire_personne.html">
+                            <button ng-click = "vm.submitUser()" ng-if = "vm.personAdd == true">
+                                Sauvegarder
+                            </button>
+
+
+
+                            <div ng-if="vm.personAdd" ng-include ="'app/formulaire_personne.html'">
                                 formulaire
                             </div>
 
                         <!--Gender: <input type="radio" ng-model="user.gender" value="male" />male-->
                         <!--<input type="radio" ng-model="user.gender" value="female" />female<br />-->
-                        <input type="button" ng-click="vm.newAlert = {}" value="Reset" />
-                        <input type="submit" ng-click="vm.saveNewAlert(vm.newAlert); vm.save = true" />
+
                     </form>
 
             </div>
 
-            <div ng-if = "vm.save">
-                    <div class="view">
-                        {{vm.newAlert}}
-                        <span>{{vm.newAlert.titre}} at {{vm.newAlert.lieu}} </span>
-                    </div>
-            </div>
 
 
         </div>

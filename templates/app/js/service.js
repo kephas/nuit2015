@@ -21,7 +21,9 @@ app.factory('Request', function ($http, $q) {
                 console.log("Data send");
             }).error(function () {
 
-            }).then();
+            }).then(
+
+        );
 
     };
     return Request;

@@ -5,12 +5,19 @@
     <title></title>
 </head>
 <body>
-    <form novalidate class="simple-form" ng-init = "vm.newUser = {}">
-            Nom <input type="text" ng-model="vm.newUser.nom" /><br />
+    <form class="simple-form" ng-init = "vm.newUser = {}" >
+            <!--Nom <input type="text" ng-class="{ errorinput: vm.submitted && vm.signUpForm.nom.$invalid }" placeholder="nom" ng-model="vm.newUser.nom"  required /><br />-->
+            Nom <input type="text" ng-model="vm.newUser.nom"  required /><br />
+                 <!--<span class="e" ng-show="vm.submitted && vm.signUpForm.nom.$invalid">Please provide a name</span>-->
             Prenom <input type="text" ng-model="vm.newUser.prenom" /><br />
             Age <input type="text" ng-model="vm.newUser.age" /><br />
-            êtes vous blessé ?  <input type="radio" ng-model="vm.newUser.estBlesse" value="male" /> oui
-            <input type="radio" ng-model="user.gender" value="female" />non<br />
+            êtes vous blessé ?  <input type="radio" ng-model="vm.newUser.estBlesse" value="oui" /> oui
+                     <input type="radio" ng-model="vm.newUser.estBlesse" value="non" />non<br />
+            <!--<button type="submit">Submit</button>-->
+
+        <!--<input type="text" name="email" ng-class="{ errorinput: submitted && signUpForm.email.$invalid }" ng-model="email" ng-pattern="/^([0-9a-zA-Z]([-\.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$/" placeholder="Email" required />-->
+        <!--<span class="e" ng-show="submitted && signUpForm.email.$invalid">Please provide a valid email address</span>-->
+        <!--<br>-->
     </form>
 
 </body>
