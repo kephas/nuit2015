@@ -40,3 +40,17 @@
     (if-let (alertes (mapcar #'second (shell-list *root-shell* "alertes")))
       (serve-json* alertes)
       (serve-json "[]"))))
+
+(defun body-param (name)
+  (cdr (assoc name (lack.request:request-body-parameters *request*) :test #'string=)))
+
+(defroute ("/alertes" :method :POST) ()
+  (with-json-error
+    (setf (shell-object *root-shell* "alertes" (make-oid))
+	  (make-instance 'alerte
+			 :titre (body-param "titre")
+			 :type (body-param "type")
+			 :emis (body-param "dateEmission")
+			 :lieu (body-param "lieu")
+			 :pers (body-param "personnes")))
+    (serve-json "{}")))
