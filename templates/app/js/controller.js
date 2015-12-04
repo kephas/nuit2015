@@ -1,4 +1,3 @@
-
 'use strict';
 
 var app = angular.module('helpus');
@@ -10,15 +9,17 @@ app.controller('MainCtrl', function ($http,
 
 	var vm = this;
 
+
 	initialize();
 
 	function initialize() {
 		vm.crises = [];
 		vm.crisesParType = {};
 		vm.newAlert = {};
+		vm.newAlert.type="";
+		vm.submitted = false;
 		vm.personAdd = false;
 		vm.showCrisesParTypes = false;
-		vm.AllTypes = ["med", "evac", "assist","zombie"];
 		vm.Request = Request;
 	};
 
@@ -60,12 +61,60 @@ app.controller('MainCtrl', function ($http,
 		vm.showCrisesParTypes = true;
 	}
 
-	vm.saveNewAlert = function(){
-		var date = new Date();
-		vm.newAlert.dateEmission = date.getDate()+"/"+(date.getMonth()+1)+"/"+ date.getFullYear();
-		vm.Request.saveNewAlert(vm.newAlert);
+	vm.getListCrisesFor = function(type){
+		vm.sortCrisesByType();
+		return vm.crisesParType[type];
 	}
 
+	vm.saveNewAlert = function(){
+		var date = new Date();
+		//vm.newAlert.dateEmission = date.getDate()+"/"+(date.getMonth()+1)+"/"+ date.getFullYear();
+		vm.Request.saveNewAlert(vm.newAlert).then(function(){
+			vm.crises.push(vm.newAlert);
+			vm.newAlert = {};
+		});
+	}
+
+	function addPerson(person){
+		if(vm.newAlert.personnes === undefined){
+			vm.newAlert.personnes = [];
+		}
+		if(vm.newAlert.personnes.indexOf(person)<0){
+			vm.newAlert.personnes.push(person);
+		}
+	}
+
+	vm.submitUser = function(){
+		//if (vm.signUpForm.$valid) {
+			console.log("is valide");
+			//save to newPersonn
+			addPerson(vm.newUser);
+			//then
+			vm.newUser = {};
+			vm.personAdd = false;
+		//} else {
+		//	vm.submitted = true;
+		//	console.log("is NOT valide");
+		//}
+	}
+
+	vm.sortByDateIntervention = function(){
+		//RESEAU DE NEURONES
+		//en fonction du type, de la priorité du temps
+
+		vm.getListeCrises();
+		vm.crisesParDate= {};
+
+		vm.crises.forEach(function(crise){
+			if(vm.crisesParDate[crise.dateIntervention] === undefined){
+				vm.crisesParDate[crise.dateIntervention ] = [];
+			}
+			if(vm.crisesParDate[crise.dateIntervention].indexOf(crise)<0){
+				vm.crisesParDate[crise.dateIntervention].push(crise);
+			}
+		})
+
+
+	}
 
 });
-

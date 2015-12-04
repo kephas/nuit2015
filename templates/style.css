@@ -1,0 +1,23 @@
+
+
+nav{color: #6AC5DA}
+@font-face {
+font-family:sanchez;
+src: url(sanchezregular.otf);
+}
+
+body {font-family:sanchez; font-size: 24pt}
+#assistance {background-color: #2b509e;} 
+#evacuation {background-color: #6ac5da;}
+#medicale {background-color: #e84165;}
+button {height:50% ;font-family: sanchez; font-size: 20pt !important; color: white;text-align: center; margin: 2%}
+
+#question{padding-left: 15px; color: #575756}
+
+#logo {width: 10%; margin-left: 150px;}
+#header {margin-top: 0px; background-color: #dff3f7;}
+
+ul li {display: inline; font-size: 14pt; margin: 9px;}
+nav {margin-top: 30px}
+
+#content{margin-top: 150px}
