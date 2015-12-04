@@ -33,6 +33,11 @@
 			 `(format nil "~a=\"~a\"" ,var ,value)
 			 `(format nil "~a=~a" ,var ,value)))))
 
+(defroute "/" ()
+  `(302
+    (:location "/static/html/home.html")
+    ("")))
+
 (defvar *root-shell*)
 
 (defun open-storage ()
