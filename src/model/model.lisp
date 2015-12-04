@@ -20,5 +20,6 @@
   ((titre :accessor alt-titre :initarg :titre)
    (type :accessor alt-type :initarg :type)
    (date-emission :accessor alt-emission :initarg :emis)
+   (date-intervention :accessor alt-intervention :initarg :inter)
    (lieu :accessor alt-lieu :initarg :lieu)
    (personnes :accessor alt-pers :initarg :pers)))

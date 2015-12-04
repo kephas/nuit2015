@@ -44,13 +44,18 @@
 (defun body-param (name)
   (cdr (assoc name (lack.request:request-body-parameters *request*) :test #'string=)))
 
+(defvar *times* '(("med" 30 :minute)("evac" 4 :hour)("assist" 1 :day)("zombie" 10 :minute)))
+
 (defroute ("/alertes" :method :POST) ()
   (with-json-error
     (setf (shell-object *root-shell* "alertes" (make-oid))
 	  (make-instance 'alerte
 			 :titre (body-param "titre")
 			 :type (body-param "type")
-			 :emis (body-param "dateEmission")
+			 :emis (local-time:format-rfc3339-timestring nil (local-time:now))
+			 :inter (local-time:format-rfc3339-timestring
+				 nil (apply #'local-time:timestamp+ (local-time:now)
+					    (cdr (assoc (body-param "type") *times* :test #'string=))))
 			 :lieu (body-param "lieu")
 			 :pers (body-param "personnes")))
     (serve-json (encode-json-plist-to-string (list :sucess t)))))
