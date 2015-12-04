@@ -1,4 +1,3 @@
-
 'use strict';
 
 var app = angular.module('helpus');
@@ -17,10 +16,10 @@ app.controller('MainCtrl', function ($http,
 		vm.crises = [];
 		vm.crisesParType = {};
 		vm.newAlert = {};
+		vm.newAlert.type="";
 		vm.submitted = false;
 		vm.personAdd = false;
 		vm.showCrisesParTypes = false;
-		vm.AllTypes = ["med", "evac", "assist","zombie"];
 		vm.Request = Request;
 	};
 
@@ -112,7 +111,7 @@ app.controller('MainCtrl', function ($http,
 
 	vm.sortByDateIntervention = function(){
 		//RESEAU DE NEURONES
-		//en fonction du type, de la priorité du temps
+		//en fonction du type, de la prioritï¿½ du temps
 
 		vm.getListeCrises().then(function(){
 			vm.crisesParDate= {};
@@ -123,5 +122,37 @@ app.controller('MainCtrl', function ($http,
 
 	}
 
-});
+	vm.submitUser = function(){
+		//if (vm.signUpForm.$valid) {
+			console.log("is valide");
+			//save to newPersonn
+			addPerson(vm.newUser);
+			//then
+			vm.newUser = {};
+			vm.personAdd = false;
+		//} else {
+		//	vm.submitted = true;
+		//	console.log("is NOT valide");
+		//}
+	}
 
+	vm.sortByDateIntervention = function(){
+		//RESEAU DE NEURONES
+		//en fonction du type, de la prioritÃ© du temps
+
+		vm.getListeCrises();
+		vm.crisesParDate= {};
+
+		vm.crises.forEach(function(crise){
+			if(vm.crisesParDate[crise.dateIntervention] === undefined){
+				vm.crisesParDate[crise.dateIntervention ] = [];
+			}
+			if(vm.crisesParDate[crise.dateIntervention].indexOf(crise)<0){
+				vm.crisesParDate[crise.dateIntervention].push(crise);
+			}
+		})
+
+
+	}
+
+});

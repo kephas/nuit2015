@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html lang="fr" ng-app="helpus">
+<head>
+<meta charset="utf-8"> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>	
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<!-- Bootsrap Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+<!-- Bootstrap JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	
+<link rel="stylesheet" type="text/css" href="style.css">
+
+        <script type="text/javascript" src="app/lib/angular.js"></script>
+        <script type="text/javascript" src="app/js/app.js"></script>
+        <script type="text/javascript" src="app/js/controller.js"></script>
+        <script type="text/javascript" src="app/js/service.js"></script>
+	<title>helpus</title>
+
+
+</head>
+
+
+
+<body>
+
+<div ng-controller = "MainCtrl as vm">
+			<div class="container-fluid">
+	<div class="row" id="header">
+		<nav>
+		<img src="helpus1.png" style="background:transparent;" id="logo" class="col-md-3">
+			<ul class="col-md-offset-4 col-md-3">
+				<li><a href="">à quoi ça sert ?</li>
+				<li><a href="">liens importants</a> </li>
+			</ul>
+	</div>
+	<div class="row" id="content"   ng-show="!(vm.newAlert.type)" >
+		<div> <p class="texte col-md-offset-3" id="question">De quelle aide avez-vous besoin ?</p> </div>
+		<button ng-click="vm.newAlert.type='assist'" class="btn btn-lg col-lg-2 button col-md-offset-2" id="assistance">assistance</button>
+		<button ng-click="vm.newAlert.type='evac'" class="btn btn-lg col-lg-2 button"  id="evacuation">évacuation</button>
+		<button ng-click="vm.newAlert.type='med'" class="btn btn-lg col-lg-2 button" id="medicale">médicale</button>
+		</nav>
+	</div>
+	
+	
+	<div class="row" id="content"   ng-show="(vm.newAlert.type)" >
+	<div>
+           <div><br/>
+                    <form novalidate class="simple-form" ng-init = "vm.newAlert = {}">
+                        Quelle urgence ? : <input type="text" ng-model="vm.newAlert.titre" /><br />
+                        Adresse: <input type="text" ng-model="vm.newAlert.lieu" /><br />
+                        Type:
+                            <div ng-bind="vm.newAlert.type">Type</div>
+                        <input type="button" ng-click="vm.newAlert = {}" value="Reset alerte" />
+                        <input type="submit" ng-click="vm.saveNewAlert(vm.newAlert); vm.save = true" />
+                        <br/>
+                        <br/>
+
+                        Qui est concerné ?
+                            <button ng-click="vm.personAdd = true" ng-if = "vm.personAdd == false">
+                                Ajouter une personne
+                            </button>
+
+                            <button ng-click = "vm.submitUser()" ng-if = "vm.personAdd == true">
+                                Sauvegarder
+                            </button>
+
+
+
+                            <div ng-if="vm.personAdd" ng-include ="'app/formulaire_personne.html'">
+                                formulaire
+                            </div>
+
+                        <!--Gender: <input type="radio" ng-model="user.gender" value="male" />male-->
+                        <!--<input type="radio" ng-model="user.gender" value="female" />female<br />-->
+
+                    </form>
+
+            </div>
+
+
+
+</div>
+
+        </div>	
+
+
+
+
+</body>
+
+
+
+</html>
