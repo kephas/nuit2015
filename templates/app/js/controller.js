@@ -99,21 +99,26 @@ app.controller('MainCtrl', function ($http,
 		//}
 	}
 
+	function classCrisesByDateIntervention() {
+		vm.crises.forEach(function (crise) {
+			if (vm.crisesParDate[crise.dateIntervention] === undefined) {
+				vm.crisesParDate[crise.dateIntervention] = [];
+			}
+			if (vm.crisesParDate[crise.dateIntervention].indexOf(crise) < 0) {
+				vm.crisesParDate[crise.dateIntervention].push(crise);
+			}
+		})
+	}
+
 	vm.sortByDateIntervention = function(){
 		//RESEAU DE NEURONES
 		//en fonction du type, de la priorité du temps
 
-		vm.getListeCrises();
-		vm.crisesParDate= {};
+		vm.getListeCrises().then(function(){
+			vm.crisesParDate= {};
+			classCrisesByDateIntervention();
+		});
 
-		vm.crises.forEach(function(crise){
-			if(vm.crisesParDate[crise.dateIntervention] === undefined){
-				vm.crisesParDate[crise.dateIntervention ] = [];
-			}
-			if(vm.crisesParDate[crise.dateIntervention].indexOf(crise)<0){
-				vm.crisesParDate[crise.dateIntervention].push(crise);
-			}
-		})
 
 
 	}

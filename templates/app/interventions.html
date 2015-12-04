@@ -1,11 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  ng-app="helpus">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <meta charset="utf-8" />
+    <!--<script type="text/javascript" src="app/lib/angular.js"></script>-->
+    <script data-require="angular.js@1.2.x" src="http://code.angularjs.org/1.2.13/angular.js" data-semver="1.2.13"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/controller.js"></script>
+    <script type="text/javascript" src="js/service.js"></script>
+    <!--<script type="text/html" src="app/formulaire_personne.html"></script>-->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
 </head>
 <body>
-    <div>
+    <div ng-controller = "MainCtrl as vm">
+        <div ng-init = "vm.sortByDateIntervention()">
+           <br/>
+       <h3>     Alertes à traiter en priorité : </h3>
+            <br/>
+
+       <div  ng-repeat = "crises in vm.crisesParDate track by $index">
+           <ul ng-if="crises.length>0" >
+               <div ng-if="$index === 0" class = "alert alert-danger" role="alert">
+
+                    Date : {{ crises[0].dateIntervention}}
+                   <li ng-repeat = " crise in crises track by $index">
+
+                       Alerte: {{ crise.titre }}
+                       à : {{ crise.lieu}}
+                       Avec : <li ng-repeat = "person in crise.personnes track by $index" ng-if ="(person.nom !== undefined)">
+                                {{ person.nom}}   ==> <span ng-if = "person.estBlesse"> Blessé !!! </span>  <span ng-if = "!person.estBlesse"> Sain et sauf </span>
+
+                            </li>
+
+
+                   </li>
+               </div>
+
+                   <div ng-if="$index === 1" class = "alert alert-info" role="alert">
+
+                       Date : {{ crises[0].dateIntervention}}
+                       <li ng-repeat = " crise in crises track by $index">
+
+                           Alerte: {{ crise.titre }}
+                           à : {{ crise.lieu}}
+                           Avec : <li ng-repeat = "person in crise.personnes track by $index">
+                       {{ person.nom}}   ==> <span ng-if = "person.estBlesse"> Blessé !!! </span>  <span ng-if = "!person.estBlesse"> Sain et sauf </span>
+
+                   </li>
+
+
+                   </li>
+               </div>
+
+               <div ng-if="$index === 2" class = "alert alert-warning" role="alert">
+
+                   Date : {{ crises[0].dateIntervention}}
+                   <li ng-repeat = " crise in crises track by $index">
+
+                       Alerte: {{ crise.titre }}
+                       à : {{ crise.lieu}}
+                       Avec : <li ng-repeat = "person in crise.personnes track by $index ">
+                   {{ person.nom }}   ==> <span ng-if = "person.estBlesse"> Blessé !!! </span>  <span ng-if = "!person.estBlesse"> Sain et sauf </span>
+
+               </li>
+
+
+                   </li>
+               </div>
+
+
+               <div ng-if="$index>2" class = "alert alert-warning" role="alert">
+
+                   Date : {{ crises[0].dateIntervention}}
+                   <li ng-repeat = " crise in crises track by $index">
+
+                       Alerte: {{ crise.titre }}
+                       à : {{ crise.lieu}}
+                       Avec : <li ng-repeat = "person in crise.personnes track by $index">
+                   {{ person.nom}}  ==> <span ng-if = "person.estBlesse"> Blessé !!! </span>  <span ng-if = "!person.estBlesse"> Sain et sauf </span>
+
+               </li>
+
+
+                   </li>
+               </div>
+           </ul>
+        </div>
+        </div>
 
     </div>
 
