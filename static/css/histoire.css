@@ -1,0 +1,18 @@
+
+@font-face {
+font-family:champagne;
+src: url(./GROKLC/Champagne-Limousines-Thick.otf);
+}
+
+body{
+	font-family: champagne; font-size: 24pt
+}
+
+h1{font-size: 30pt}
+h2{font-style: bold; color: #e73571; font-size: 24pt}
+h3{font-style: bold; color: #04aad2; font-size: 24pt}
+h4{font-style: bold; color: #f3b717; font-size: 24pt}
+h5{font-style: bold; color: #e76346; font-size: 24pt}
+h6{font-style: bold; color: #339c86; font-size: 24pt}
+
+#texte {text-align: center;padding:0;}
