@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="helpus">
+    <head>
+        <meta charset="utf-8" />
+        <script type="text/javascript" src="app/lib/angular.js"></script>
+        <script type="text/javascript" src="app/js/app.js"></script>
+        <script type="text/javascript" src="app/js/controller.js"></script>
+        <script type="text/javascript" src="app/js/service.js"></script>
+        <!--<script type="text/html" src="app/formulaire_personne.html"></script>-->
+        <script src="app/resources/crises_tests.json"></script>
+    </head>
+    
+    <body>
+		<div ng-controller = "MainCtrl as vm">
+
+            <div ng-if = "vm.crises.length>0">
+
+                <button name="sortCrisesButton" ng-click = "vm.sortAndShowCrises()" ng-if="!vm.showCrisesParTypes">
+                    Trier les alertes par type d'urgence
+                </button>
+
+                <button ng-click = "vm.showCrisesParTypes = false" ng-if="vm.showCrisesParTypes">
+                    Afficher les dernières alertes
+                </button>
+
+
+                <div ng-if = "vm.showCrisesParTypes === false">
+                    <ol ng-repeat="alerte in vm.crises  track by $index" >
+                        <div class="view">
+                            <span>{{alerte.titre}} at {{alerte.lieu}} </span>
+                        </div>
+                    </ol>
+                </div>
+
+                <div ng-if = "vm.showCrisesParTypes">
+                    <ol ng-repeat="type in vm.crisesParType track by $index" >
+                        <div class="view" ng-if = "type.length > 0">
+                            <span> Type d'urgence : {{type[0].type}} </span>
+                            <li ng-repeat ="alert in type">
+                                {{alert.titre}} at {{alert.lieu}}
+                            </li>
+                        </div>
+                    </ol>
+                </div>
+            </div>
+
+
+            <div><br/>
+                    <form novalidate class="simple-form" ng-init = "vm.newAlert = {}">
+                        Quelle urgence ? : <input type="text" ng-model="vm.newAlert.titre" /><br />
+                        Adresse: <input type="text" ng-model="vm.newAlert.lieu" /><br />
+                        Type:
+                            <select name = "type" ng-model="vm.newAlert.type">
+                                <option ng-repeat = "type in vm.AllTypes" >{{type}}</option>
+                            </select><br/>
+                        Qui est concerné ?
+                            <button ng-click="vm.personAdd = true">
+                                Ajouter une personne
+                            </button>
+
+                            <div ng-if="vm.personAdd" ngInclude ="formulaire_personne.html">
+                                formulaire
+                            </div>
+
+                        <!--Gender: <input type="radio" ng-model="user.gender" value="male" />male-->
+                        <!--<input type="radio" ng-model="user.gender" value="female" />female<br />-->
+                        <input type="button" ng-click="vm.newAlert = {}" value="Reset" />
+                        <input type="submit" ng-click="vm.saveNewAlert(vm.newAlert); vm.save = true" />
+                    </form>
+
+            </div>
+
+            <div ng-if = "vm.save">
+                    <div class="view">
+                        {{vm.newAlert}}
+                        <span>{{vm.newAlert.titre}} at {{vm.newAlert.lieu}} </span>
+                    </div>
+            </div>
+
+
+        </div>
+    </body>
+</html>

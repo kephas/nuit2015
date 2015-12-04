@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <form novalidate class="simple-form" ng-init = "vm.newUser = {}">
+            Nom <input type="text" ng-model="vm.newUser.nom" /><br />
+            Prenom <input type="text" ng-model="vm.newUser.prenom" /><br />
+            Age <input type="text" ng-model="vm.newUser.age" /><br />
+            êtes vous blessé ?  <input type="radio" ng-model="vm.newUser.estBlesse" value="male" /> oui
+            <input type="radio" ng-model="user.gender" value="female" />non<br />
+    </form>
+
+</body>
+</html>
