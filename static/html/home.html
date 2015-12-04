@@ -10,12 +10,12 @@
 <!-- Bootstrap JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
 
-        <script type="text/javascript" src="app/lib/angular.js"></script>
-        <script type="text/javascript" src="app/js/app.js"></script>
-        <script type="text/javascript" src="app/js/controller.js"></script>
-        <script type="text/javascript" src="app/js/service.js"></script>
+        <script type="text/javascript" src="/static/js/angular.js"></script>
+        <script type="text/javascript" src="/static/js/app.js"></script>
+        <script type="text/javascript" src="/static/js/controller.js"></script>
+        <script type="text/javascript" src="/static/js/service.js"></script>
 	<title>helpus</title>
 
 
@@ -29,7 +29,7 @@
 			<div class="container-fluid">
 	<div class="row" id="header">
 		<nav>
-		<img src="helpus1.png" style="background:transparent;" id="logo" class="col-md-3">
+		<img src="/static/img/helpus1.png" style="background:transparent;" id="logo" class="col-md-3">
 			<ul class="col-md-offset-4 col-md-3">
 				<li><a href="">à quoi ça sert ?</li>
 				<li><a href="">liens importants</a> </li>
@@ -68,7 +68,7 @@
 
 
 
-                            <div ng-if="vm.personAdd" ng-include ="'app/formulaire_personne.html'">
+                            <div ng-if="vm.personAdd" ng-include ="'/static/html/formulaire_personne.html'">
                                 formulaire
                             </div>
 

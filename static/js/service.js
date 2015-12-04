@@ -4,7 +4,7 @@ app.factory('Request', function ($http, $q) {
     function Request() {}
 
     Request.getAllertes = function () {
-        return $http.get("http://groklc.nothos.net/alertes")
+        return $http.get("/alertes")
             .success(function (data) {
             }).error(function (data) {
                 console.log("error request ")
@@ -16,7 +16,7 @@ app.factory('Request', function ($http, $q) {
     };
 
     Request.saveNewAlert = function (newAlert) {
-        return $http.post("http://groklc.nothos.net/alertes", angular.toJson(newAlert))
+        return $http.post("/alertes", angular.toJson(newAlert))
             .success(function (data) {
                 console.log("Data send");
             }).error(function () {
